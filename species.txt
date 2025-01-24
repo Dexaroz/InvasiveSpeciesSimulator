@@ -1,0 +1,11 @@
+Nombre_Comun,Nombre_Cientifico,Tipo,Habitat,Dieta
+Jaguar,Panthera onca,Mamífero,Selva Tropical,Carnívoro
+Capibara,Hydrochoerus hydrochaeris,Mamífero,Selva Tropical,Herbívoro
+Mono Aullador,Alouatta spp.,Mamífero,Selva Tropical,Frugívoro/Folívoro
+Águila Arpía,Harpia harpyja,Ave,Selva Tropical,Carnívoro
+Rana Arbórea,Agalychnis callidryas,Anfibio,Selva Tropical,Insectívoro
+Hormiga Cortadora de Hojas,Atta spp.,Insecto,Selva Tropical,Herbívoro (Hongos cultivados)
+Hormiga Bala,Paraponera clavata,Insecto,Selva Tropical,Omnívoro
+Boa Constrictor,Boa constrictor,Reptil,Selva Tropical,Carnívoro
+Tucán,Ramphastos toco,Ave,Selva Tropical,Frugívoro
+Caimán,Caiman crocodilus,Reptil,Selva Tropical,Carnívoro

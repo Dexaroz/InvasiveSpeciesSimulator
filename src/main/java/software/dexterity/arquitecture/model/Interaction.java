@@ -1,7 +1,15 @@
 package software.dexterity.arquitecture.model;
 
-public record Interaction(Specie specie1, Specie specie2, InteractionType interactionType) {
+public record Interaction(Organism organism1, Organism organism2, InteractionType interactionType) {
     public double calculateImpact(){
-        return interactionType.getRelationCoefficient() * this.specie1.population() * this.specie2.population();
+        return sigmoideFunction();
+    }
+
+    private double sigmoideFunction(){
+        return (1./ Math.pow(Math.E, getCoefficient()));
+    }
+
+    private double getCoefficient(){
+        return (interactionType.getRelationCoefficient() * Math.abs(this.organism1.population() - this.organism2.population()));
     }
 }
