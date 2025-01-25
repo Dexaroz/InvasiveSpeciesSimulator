@@ -6,12 +6,7 @@ public record Interaction(Organism organism1, Organism organism2, InteractionTyp
     }
 
     public Interaction updateInteraction(int index, Organism organism) {
-        //TODO REFACTOR
-        if (index == 0){
-            return new Interaction(organism, organism2, interactionType);
-        } else {
-            return new Interaction(organism1, organism, interactionType);
-        }
+        return index == 0 ? new Interaction(organism, organism2, interactionType) : new Interaction(organism1, organism, interactionType);
     }
 
     private double sigmoideFunction(){
@@ -19,6 +14,6 @@ public record Interaction(Organism organism1, Organism organism2, InteractionTyp
     }
 
     private double getCoefficient(){
-        return (interactionType.getRelationCoefficient() * Math.abs(this.organism1.population() - this.organism2.population()));
+        return (interactionType.getRelationCoefficient() * organism1.growthRate() * Math.abs(this.organism1.population() - this.organism2.population()));
     }
 }

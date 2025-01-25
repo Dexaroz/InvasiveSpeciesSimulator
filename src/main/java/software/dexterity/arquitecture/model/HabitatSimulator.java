@@ -1,5 +1,8 @@
 package software.dexterity.arquitecture.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HabitatSimulator {
     private final Habitat habitat;
     private final int timeStep;
@@ -10,8 +13,9 @@ public class HabitatSimulator {
     }
 
     public void simulateSteps(){
-        //TODO REFACTOR
-        for (Interaction interaction : habitat.getInteraction()){
+        List<Interaction> interactionsCopy = new ArrayList<>(habitat.getInteraction());
+
+        for (Interaction interaction : interactionsCopy){
             Organism organism1 = interaction.organism1();
             Organism organism2 = interaction.organism2();
 
@@ -31,33 +35,28 @@ public class HabitatSimulator {
     }
 
     public double calculateImpact(Interaction interaction, Organism target, Organism source){
-        //TODO REFACTOR CASES
         switch (interaction.interactionType()){
-            case InteractionType.Competition -> {return calculateCompetitionImpact(interaction, target, source);}
-            case InteractionType.Neutral -> {return calculateNeutralImpact(interaction, target, source);}
-            case InteractionType.Symbiosis -> {return calculateSymbiosisImpact(interaction, target, source);}
+            case InteractionType.Competition -> {return calculateCompetitionImpact(interaction, source);}
+            case InteractionType.Neutral -> {return calculateNeutralImpact();}
+            case InteractionType.Symbiosis -> {return calculateSymbiosisImpact(interaction, source);}
             case InteractionType.Depredation -> {return calculateDepredationImpact(interaction, target, source);}
             default -> {return 1.0;}
         }
     }
 
     private int calculateDepredationImpact(Interaction interaction, Organism target, Organism source) {
-        if (target == interaction.organism1()) {
-            return (int) interaction.calculateImpact() * source.population();
-        } else {
-            return (int) -interaction.calculateImpact() * source.population();
-        }
+        return target == interaction.organism1() ? (int) interaction.calculateImpact() * source.population() : (int) -interaction.calculateImpact() * source.population();
     }
 
-    private int calculateSymbiosisImpact(Interaction interaction, Organism target, Organism source) {
+    private int calculateSymbiosisImpact(Interaction interaction, Organism source) {
         return (int) interaction.calculateImpact() * source.population();
     }
 
-    private int calculateNeutralImpact(Interaction interaction, Organism target, Organism source) {
+    private int calculateNeutralImpact() {
         return 0;
     }
 
-    private int calculateCompetitionImpact(Interaction interaction, Organism target, Organism source) {
+    private int calculateCompetitionImpact(Interaction interaction, Organism source) {
         return (int) (interaction.calculateImpact() * source.population());
     }
 }

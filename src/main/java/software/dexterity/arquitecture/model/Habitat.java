@@ -29,7 +29,6 @@ public class Habitat {
     }
 
     public void updateEnvironment(Organism oldOrganism, Organism newOrganism, Interaction interaction){
-        //TODO REFACTOR
         replaceOrganism(oldOrganism, newOrganism);
         replaceInteraction(oldOrganism, newOrganism, interaction);
     }
@@ -41,10 +40,6 @@ public class Habitat {
 
     private void replaceInteraction(Organism oldOrganism, Organism newOrganism, Interaction oldInteraction){
         interactions.remove(oldInteraction);
-        if (oldInteraction.organism1() == oldOrganism){
-            interactions.add(oldInteraction.updateInteraction(0, newOrganism));
-        } else {
-            interactions.add(oldInteraction.updateInteraction(1, newOrganism));
-        }
+        interactions.add(oldInteraction.organism1() == oldOrganism ? oldInteraction.updateInteraction(0, newOrganism) : oldInteraction.updateInteraction(1, newOrganism));
     }
 }
