@@ -1,10 +1,10 @@
 package software.dexterity.arquitecture.model;
 
 public enum InteractionType {
-    Depredator(-1),
-    Symbiosis(2),
+    Depredation(-0.7),
+    Symbiosis(1.2),
     Neutral(1),
-    Competition(-0.5);
+    Competition(-0.3);
 
     private final double relationCoefficient;
 

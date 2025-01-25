@@ -12,7 +12,7 @@ public class Habitat {
         this.interactions = new ArrayList<>();
     }
 
-    public void addSOrganisms(Organism organism){
+    public void addOrganisms(Organism organism){
         organisms.add(organism);
     }
 
@@ -20,11 +20,31 @@ public class Habitat {
         interactions.add(new Interaction(organism1, organism2, interactionType));
     }
 
-    public List<Organism> getSOrganisms(){
+    public List<Organism> getOrganisms(){
         return organisms;
     }
 
     public List<Interaction> getInteraction(){
         return interactions;
+    }
+
+    public void updateEnvironment(Organism oldOrganism, Organism newOrganism, Interaction interaction){
+        //TODO REFACTOR
+        replaceOrganism(oldOrganism, newOrganism);
+        replaceInteraction(oldOrganism, newOrganism, interaction);
+    }
+
+    private void replaceOrganism(Organism oldOrganism, Organism newOrganism){
+        organisms.remove(oldOrganism);
+        organisms.add(newOrganism);
+    }
+
+    private void replaceInteraction(Organism oldOrganism, Organism newOrganism, Interaction oldInteraction){
+        interactions.remove(oldInteraction);
+        if (oldInteraction.organism1() == oldOrganism){
+            interactions.add(oldInteraction.updateInteraction(0, newOrganism));
+        } else {
+            interactions.add(oldInteraction.updateInteraction(1, newOrganism));
+        }
     }
 }

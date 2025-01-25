@@ -5,6 +5,15 @@ public record Interaction(Organism organism1, Organism organism2, InteractionTyp
         return sigmoideFunction();
     }
 
+    public Interaction updateInteraction(int index, Organism organism) {
+        //TODO REFACTOR
+        if (index == 0){
+            return new Interaction(organism, organism2, interactionType);
+        } else {
+            return new Interaction(organism1, organism, interactionType);
+        }
+    }
+
     private double sigmoideFunction(){
         return (1./ Math.pow(Math.E, getCoefficient()));
     }
